@@ -16,7 +16,19 @@ cd meli-clone
 
 npm install
 
-4. Inicia la aplicación.
+4. Inicia el servidor.
+
+Abre la terminal y navega hasta el archivo que contiene el servidor, así:
+
+cd meli-clone/src/Server/server.js
+
+Luego, el servidor se ejecutará y se mostrará en un consola un aviso con "Servidor en funcionamiento en el puerto 3001".
+
+5. Inicia la aplicación.
+
+Abre la terminal y navega hasta la raíz de la aplicación, así:
+
+cd meli-clone
 
 npm start
 
