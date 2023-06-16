@@ -1,0 +1,60 @@
+$primary-color: #fff159;
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar {
+  @extend .center;
+  background-color: $primary-color;
+  padding: 10px;
+
+  .logo {
+    margin-right: 20px;
+
+    .logo-img {
+      height: 30px;
+      cursor: pointer;
+    }
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    flex-grow: 0.5;
+    margin-right: 20px;
+    height: 40px; // Ajusta la altura de la barra de búsqueda
+    max-height: 100%;
+    width: auto;
+
+    .search-bar-input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-right: none;
+      font-size: 14px;
+      color: #333;
+      outline: none;
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+
+    .search-bar-button {
+      background-color: #ebebeb;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      height: 90%; // Ajusta la altura del botón al 100% de la barra de búsqueda
+      object-fit: contain;
+
+      .search-bar-button-logo {
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}
