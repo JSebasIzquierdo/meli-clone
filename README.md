@@ -14,14 +14,19 @@ npm install
 
 3. Inicia el servidor.
 
-Abre la terminal y navega hasta el archivo que contiene el servidor, así:
+Abre una terminal y navega hasta el archivo que contiene el servidor, así:
 
 cd Server
+
+Luego, una vez dentro de la carpeta Server, ejecuta el siguiente comando:
+
 node server.js
 
 Luego, el servidor se ejecutará y se mostrará en un consola un aviso con "Servidor en funcionamiento en el puerto 3001".
 
-5. Inicia la aplicación.
+4. Inicia la aplicación.
+
+Abre otra terminal y utiliza el siguiente comando:
 
 npm start
 

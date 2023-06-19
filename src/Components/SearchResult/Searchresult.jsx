@@ -12,7 +12,7 @@ const SearchResult = ({ results }) => {
               <p className="breadcrumb-text">{category}</p>
             </Link>
             {index !== category.length - 1 && (
-              <span className="breadcrumb-separator">|</span>
+              <span className="breadcrumb-separator"> | </span>
             )}
           </React.Fragment>
         ))}
