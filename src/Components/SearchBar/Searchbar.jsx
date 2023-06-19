@@ -2,9 +2,7 @@ import React from "react";
 import MeliLogo from "../../Assets/Images/meli-logo.png";
 import LupaMeli from "../../Assets/Images/lupa-meli.png";
 import "./Searchbar.scss";
-import axios from "axios";
 import { useState } from "react";
-import Searchresult from "../SearchResult/SearchResult";
 import { useNavigate } from "react-router-dom";
 
 const Searchbar = () => {
