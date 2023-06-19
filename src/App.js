@@ -1,3 +1,4 @@
+import React from "react";
 import Searchbar from "./Components/SearchBar/Searchbar.jsx";
 import SearchResultRequest from "./Components/SearchResult/SearchResultRequest/SearchResultRequest.jsx";
 import ProductDetails from "./Components/ProductDetails/ProductDetails.jsx";
@@ -8,13 +9,16 @@ function App() {
   return (
     <Router>
       <div className="full_body">
-        <Searchbar />
-        <div className="content">
+        <header>
+          <Searchbar />
+        </header>
+
+        <main className="content">
           <Routes>
             <Route path="/items" element={<SearchResultRequest />} />
             <Route path="/items/:id" element={<ProductDetails />} />
           </Routes>
-        </div>
+        </main>
       </div>
     </Router>
   );

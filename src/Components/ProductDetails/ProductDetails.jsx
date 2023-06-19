@@ -14,6 +14,7 @@ const ProductDetails = () => {
           `http://localhost:3001/api/items/${id}`
         );
         setProduct(response.data.item);
+        //updatePageTitle(response.data.item.title);
       } catch (error) {
         console.error(error);
       }
@@ -21,6 +22,16 @@ const ProductDetails = () => {
 
     fetchProductDetails();
   }, [id]);
+
+  useEffect(() => {
+    const updatePageTitle = (title) => {
+      document.title = title
+        ? `${title} - Detalles del Producto`
+        : "Detalles del Producto";
+    };
+
+    updatePageTitle(product ? product.title : null);
+  }, [product]);
 
   if (!product) {
     return <div>Cargando...</div>;
@@ -30,7 +41,11 @@ const ProductDetails = () => {
     <div className="container-details">
       <div className="container-image-info">
         <div className="image-container">
-          <img src={product.picture} alt="Producto" className="product-image" />
+          <img
+            src={product.picture}
+            alt={product.title}
+            className="product-image"
+          />
         </div>
         <div className="info-container">
           <div className="condition-quantity">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import Searchresult from "../Searchresult";
+import SearchResult from "../SearchResult";
 
 const SearchResultRequest = () => {
   const location = useLocation();
@@ -11,10 +11,10 @@ const SearchResultRequest = () => {
   useEffect(() => {
     const fetchSearchResults = async () => {
       try {
-        //const queryWithPlus = searchQuery.replace(/\s+/g, "+");
+        const encodedQuery = encodeURIComponent(searchQuery);
 
         const response = await axios.get(
-          `http://localhost:3001/api/items?q=${searchQuery}`
+          `http://localhost:3001/api/items?q=${encodedQuery}`
         );
 
         setResults(response.data);
@@ -28,7 +28,21 @@ const SearchResultRequest = () => {
     }
   }, [searchQuery]);
 
-  return <div>{results && <Searchresult results={results} />}</div>;
+  useEffect(() => {
+    const updatePageTitle = () => {
+      document.title = searchQuery
+        ? `${searchQuery} | MercadoLibre`
+        : "Lista de Resultados";
+    };
+
+    updatePageTitle();
+  }, [searchQuery]);
+
+  return (
+    <main>
+      <div>{results && <SearchResult results={results} />}</div>
+    </main>
+  );
 };
 
 export default SearchResultRequest;

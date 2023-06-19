@@ -8,27 +8,20 @@ Este proyecto es una aplicación web desarrollada en React que permite realizar 
 
 git clone https://github.com/jsebasizquierdo/meli-clone.git
 
-2. Accede al directorio del proyecto.
-
-cd meli-clone
-
-3. Instala las dependencias del proyecto.
+2. Instala las dependencias del proyecto.
 
 npm install
 
-4. Inicia el servidor.
+3. Inicia el servidor.
 
 Abre la terminal y navega hasta el archivo que contiene el servidor, así:
 
-cd meli-clone/src/Server/server.js
+cd Server
+node server.js
 
 Luego, el servidor se ejecutará y se mostrará en un consola un aviso con "Servidor en funcionamiento en el puerto 3001".
 
 5. Inicia la aplicación.
-
-Abre la terminal y navega hasta la raíz de la aplicación, así:
-
-cd meli-clone
 
 npm start
 

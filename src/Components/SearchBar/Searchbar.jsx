@@ -4,7 +4,7 @@ import LupaMeli from "../../Assets/Images/lupa-meli.png";
 import "./Searchbar.scss";
 import axios from "axios";
 import { useState } from "react";
-import Searchresult from "../SearchResult/Searchresult";
+import Searchresult from "../SearchResult/SearchResult";
 import { useNavigate } from "react-router-dom";
 
 const Searchbar = () => {
@@ -12,7 +12,9 @@ const Searchbar = () => {
   const [query, setQuery] = useState("");
 
   const handleSearch = async () => {
-    navigate(`/items?search=${encodeURIComponent(query)}`);
+    if (query.trim() !== "") {
+      navigate(`/items?search=${encodeURIComponent(query)}`);
+    }
   };
 
   const handleKeyDown = (event) => {

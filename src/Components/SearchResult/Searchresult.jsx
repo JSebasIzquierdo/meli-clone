@@ -2,39 +2,47 @@ import React from "react";
 import "./searchresult.scss";
 import { Link } from "react-router-dom";
 
-const Searchresult = ({ results }) => {
+const SearchResult = ({ results }) => {
   return (
     <div className="container-search">
       <div className="breadcrumb">
-        {results?.categories?.map((categories, index) => (
-          <p className="breadcrumb-text">
-            {categories}
-            {index !== categories.length - 1 && " | "}
-          </p>
+        {results?.categories?.map((category, index) => (
+          <React.Fragment key={index}>
+            <Link to={`/category/${category}`} className="breadcrumb-link">
+              <p className="breadcrumb-text">{category}</p>
+            </Link>
+            {index !== category.length - 1 && (
+              <span className="breadcrumb-separator">|</span>
+            )}
+          </React.Fragment>
         ))}
       </div>
       <div className="container-products">
-        {results?.items?.map((products) => (
-          <Link to={`/items/${products.id}`} className="product-link">
-            <div className="product-result" id={products.id}>
+        {results?.items?.map((product) => (
+          <Link
+            to={`/items/${product.id}`}
+            className="product-link"
+            key={product.id}
+          >
+            <div className="product-result" id={product.id}>
               <div className="product-result-thumbnail">
                 <img
-                  alt="Imagen miniatura del producto"
+                  alt={product.title}
                   className="thumbnail-product"
-                  src={products.picture}
+                  src={product.picture}
                 />
               </div>
               <div className="container-prices-name">
                 <div className="container-prices">
                   <div className="prices-1">
-                    <p className="price">$ {products.price.amount}</p>
+                    <p className="price">$ {product.price.amount}</p>
                   </div>
                   <div className="prices-2">
                     <p className="etc-price">Capital Federal</p>
                   </div>
                 </div>
                 <div className="container-name">
-                  <p className="name-product">{products.title}</p>
+                  <p className="name-product">{product.title}</p>
                 </div>
               </div>
             </div>
@@ -45,4 +53,4 @@ const Searchresult = ({ results }) => {
   );
 };
 
-export default Searchresult;
+export default SearchResult;
