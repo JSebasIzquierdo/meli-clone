@@ -56,6 +56,10 @@ El componente `Searchresult` muestra los resultados de búsqueda obtenidos del b
 
 El componente `ProductDetails` muestra los detalles de un producto específico. Muestra la imagen, el título, el precio, la descripción, etc., del producto seleccionado.
 
+### CurrencyFormat
+
+El componente `CurrencyFormat` utiliza la función toLocaleString para formatear el valor numérico como una representación de moneda en el idioma y estilo especificados. Luego, separa la parte entera y la parte decimal del valor formateado utilizando la coma como separador decimal.
+
 ## Backend
 
 El proyecto también incluye un backend desarrollado en Express que actúa como intermediario entre la aplicación de React y la API de MercadoLibre. El backend se encarga de realizar las solicitudes a la API de MercadoLibre y formatear los datos de respuesta antes de enviarlos al frontend.
