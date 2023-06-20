@@ -3,6 +3,10 @@ const axios = require("axios");
 
 const app = express();
 const PORT = 3001;
+const API_BASE_URL = "https://api.mercadolibre.com";
+
+const AUTHOR_NAME = "Juan";
+const AUTHOR_LASTNAME = "Izquierdo";
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -11,39 +15,56 @@ app.use((req, res, next) => {
   next();
 });
 
+const getCategories = (filters) => {
+  const categoryFilter = filters.find((filter) => filter.id === "category");
+
+  if (!categoryFilter || !categoryFilter.values.length) {
+    return [];
+  }
+
+  const categoryCounts = {};
+  let mostFrequentCategory = "";
+  let maxCount = 0;
+
+  categoryFilter.values[0].path_from_root.forEach((category) => {
+    const categoryName = category.name;
+    categoryCounts[categoryName] = (categoryCounts[categoryName] || 0) + 1;
+
+    if (categoryCounts[categoryName] > maxCount) {
+      mostFrequentCategory = categoryName;
+      maxCount = categoryCounts[categoryName];
+    }
+  });
+
+  return [mostFrequentCategory];
+};
+
 app.get("/api/items", (req, res) => {
   const query = req.query.q;
 
-  // Consultar el endpoint de MercadoLibre
   axios
-    .get(`https://api.mercadolibre.com/sites/MLA/search?q=${query}`)
+    .get(`${API_BASE_URL}/sites/MLA/search?q=${query}`)
     .then((response) => {
-      console.log("response", response);
       const data = response.data;
 
-      // Formatear los resultados según el formato indicado
       const formattedResponse = {
         author: {
-          name: "Juan",
-          lastname: "Izquierdo",
+          name: AUTHOR_NAME,
+          lastname: AUTHOR_LASTNAME,
         },
-        categories: data.filters
-          .find((filter) => filter.id === "category")
-          ?.values[0].path_from_root.map((category) => category.name),
+        categories: getCategories(data.filters),
         items: data.results.slice(0, 4).map((item) => ({
           id: item.id,
           title: item.title,
           price: {
             currency: item.currency_id,
-            amount: Math.floor(item.price),
-            decimals:
-              item.price % 1 === 0
-                ? 0
-                : Number(item.price.toString().split(".")[1]),
+            amount: item.price,
+            decimals: item.decimals,
           },
           picture: item.thumbnail,
           condition: item.condition,
           free_shipping: item.shipping.free_shipping,
+          seller_address1: item.seller_address.state.name,
         })),
       };
 
@@ -58,43 +79,55 @@ app.get("/api/items", (req, res) => {
 app.get("/api/items/:id", (req, res) => {
   const id = req.params.id;
 
-  // Consultar los endpoints de MercadoLibre
   axios
     .all([
-      axios.get(`https://api.mercadolibre.com/items/${id}`),
-      axios.get(`https://api.mercadolibre.com/items/${id}/description`),
+      axios.get(`${API_BASE_URL}/items/${id}`),
+      axios.get(`${API_BASE_URL}/items/${id}/description`),
     ])
     .then(
       axios.spread((itemResponse, descriptionResponse) => {
         const itemData = itemResponse.data;
         const descriptionData = descriptionResponse.data;
+        const categoryId = itemData.category_id;
 
-        // Formatear los resultados según el formato indicado
-        const formattedResponse = {
-          author: {
-            name: "Juan",
-            lastname: "Izquierdo",
-          },
-          item: {
-            id: itemData.id,
-            title: itemData.title,
-            price: {
-              currency: itemData.currency_id,
-              amount: Math.floor(itemData.price),
-              decimals:
-                itemData.price % 1 === 0
-                  ? 0
-                  : Number(itemData.price.toString().split(".")[1]),
-            },
-            picture: itemData.thumbnail,
-            condition: itemData.condition,
-            free_shipping: itemData.shipping.free_shipping,
-            sold_quantity: itemData.sold_quantity,
-            description: descriptionData.plain_text,
-          },
-        };
+        axios
+          .get(`${API_BASE_URL}/categories/${categoryId}`)
+          .then((categoryResponse) => {
+            const categoryData = categoryResponse.data;
+            const breadcrumb = categoryData.path_from_root.map(
+              (category) => category.name
+            );
 
-        res.json(formattedResponse);
+            const formattedResponse = {
+              author: {
+                name: AUTHOR_NAME,
+                lastname: AUTHOR_LASTNAME,
+              },
+              item: {
+                id: itemData.id,
+                title: itemData.title,
+                price: {
+                  currency: itemData.currency_id,
+                  amount: itemData.price,
+                  decimals: itemData.decimals,
+                },
+                picture: itemData.thumbnail,
+                condition: itemData.condition,
+                free_shipping: itemData.shipping.free_shipping,
+                sold_quantity: itemData.sold_quantity,
+                description: descriptionData.plain_text,
+                breadcrumb: breadcrumb,
+              },
+            };
+
+            res.json(formattedResponse);
+          })
+          .catch((error) => {
+            console.error(error);
+            res
+              .status(500)
+              .json({ error: "Error al consultar los resultados" });
+          });
       })
     )
     .catch((error) => {

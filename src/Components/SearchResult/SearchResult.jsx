@@ -1,6 +1,7 @@
 import React from "react";
 import "./searchresult.scss";
 import { Link } from "react-router-dom";
+import CurrencyFormat from "../CurrencyFormat/CurrencyFormat";
 
 const SearchResult = ({ results }) => {
   return (
@@ -11,7 +12,7 @@ const SearchResult = ({ results }) => {
             <Link to={`/category/${category}`} className="breadcrumb-link">
               <p className="breadcrumb-text">{category}</p>
             </Link>
-            {index !== category.length - 1 && (
+            {index !== results?.categories?.length - 1 && (
               <span className="breadcrumb-separator"> | </span>
             )}
           </React.Fragment>
@@ -35,10 +36,15 @@ const SearchResult = ({ results }) => {
               <div className="container-prices-name">
                 <div className="container-prices">
                   <div className="prices-1">
-                    <p className="price">$ {product.price.amount}</p>
+                    <CurrencyFormat
+                      value={product.price.amount}
+                      className={"price"}
+                      minfractionDigits={0}
+                      maxfractionDigits={0}
+                    />
                   </div>
                   <div className="prices-2">
-                    <p className="etc-price">Capital Federal</p>
+                    <p className="etc-price">{product.seller_address1}</p>
                   </div>
                 </div>
                 <div className="container-name">

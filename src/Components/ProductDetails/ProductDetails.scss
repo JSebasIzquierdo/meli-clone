@@ -1,92 +1,119 @@
 .container-details {
   display: flex;
+  flex-direction: column;
   margin: 20px auto;
   max-width: 1200px;
   width: 100%;
   background-color: #fff;
-  flex-direction: column;
   padding: 20px;
+}
+
+.container-image-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-container {
+  flex: 2.8 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image {
+  width: 550px;
+  height: auto;
+}
+
+.info-container {
+  flex: 1;
+  margin-top: 20px;
+
+  .price-container-detail {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+    .price-detail {
+      font-size: 32px;
+      font-weight: 400;
+      color: #333;
+      line-height: 1.25;
+    }
+
+    .decimals {
+      font-size: 14px;
+      margin-left: 5px;
+    }
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .condition {
+    font-size: 14px;
+  }
+
+  .buy-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3483fa;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+  }
+}
+
+.description-container {
+  margin-top: 20px;
+
+  .description-title {
+    font-size: 24px;
+    font-weight: 400;
+    color: #333;
+    line-height: 1.25;
+    margin: 0px;
+  }
+
+  .description-text {
+    font-size: 14px;
+    color: #555;
+    width: 100%;
+    text-align: justify;
+  }
+}
+
+/* Media queries */
+
+@media (max-width: 900px) {
+  .container-details {
+    padding: 20px;
+    width: auto;
+    max-width: none;
+  }
 
   .container-image-info {
-    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
   }
 
   .image-container {
-    flex: 2.8 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex: 1;
 
     .product-image {
-      width: 600px;
-      height: 100%;
+      width: 300px;
     }
   }
 
   .info-container {
-    flex: 1;
-    margin-left: 20px;
-
-    .condition-quantity {
-      display: flex;
-    }
-
-    .price-container-detail {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 40px;
-
-      .price-detail {
-        
-        font-size: 32px;
-        font-weight: 400;
-        color: #333;
-        line-height: 1.25;
-      }
-
-      .decimals {
-        font-size: 14px;
-        margin-left: 5px;
-      }
-    }
-
-    .title {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .condition {
-      font-size: 14px;
-    }
-
-    .buy-button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #3483fa;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      width: 100%;
-    }
+    margin-top: 0;
   }
 
-  .description-container {
-    margin-top: 20px;
-
-    .description-title {
-      font-size: 24px;
-      font-weight: 400;
-      color: #333;
-      line-height: 1.25;
-      margin: 0px;
-    }
-
-    .description-text {
-      font-size: 14px;
-      color: #555;
-      width: 70%;
-      text-align: justify;
-    }
+  .description-text {
+    width: 70%;
   }
 }
