@@ -13,6 +13,8 @@ const CurrencyFormat = ({
     maximumFractionDigits: maxfractionDigits,
   });
 
+  const [integerPart, decimalPart] = formattedValue.split(",");
+
   return (
     <span
       title={formattedValue}
@@ -20,7 +22,8 @@ const CurrencyFormat = ({
       role="text"
       className={className}
     >
-      {`$ ${formattedValue}`}
+      <span className="integer">{`$ ${integerPart}`}</span>
+      {decimalPart && <span className="decimal">{`.${decimalPart}`}</span>}
     </span>
   );
 };

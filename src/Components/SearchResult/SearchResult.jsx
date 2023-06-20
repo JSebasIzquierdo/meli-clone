@@ -1,7 +1,7 @@
 import React from "react";
 import "./searchresult.scss";
 import { Link } from "react-router-dom";
-import CurrencyFormat from "../CurrencyFormat/CurrencyFormat";
+import CurrencyFormat from "../Utilities/CurrencyFormat/CurrencyFormat";
 
 const SearchResult = ({ results }) => {
   return (

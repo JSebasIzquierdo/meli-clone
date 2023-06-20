@@ -31,7 +31,7 @@ const SearchResultRequest = () => {
   useEffect(() => {
     const updatePageTitle = () => {
       document.title = searchQuery
-        ? `${searchQuery} | MercadoLibre`
+        ? `${searchQuery} | Meli Clone`
         : "Lista de Resultados";
     };
 

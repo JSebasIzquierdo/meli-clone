@@ -25,14 +25,14 @@ $primary-color: #fff159;
     align-items: center;
     flex-grow: 0.5;
     margin-right: 20px;
-    height: 40px; // Ajusta la altura de la barra de búsqueda
+    height: 40px;
     max-height: 100%;
     width: auto;
 
     .search-bar-input {
       width: 100%;
       padding: 8px;
-      border: 1px solid #ccc;
+      border: none;
       border-right: none;
       font-size: 14px;
       color: #333;
@@ -48,7 +48,7 @@ $primary-color: #fff159;
       border: none;
       padding: 8px;
       cursor: pointer;
-      height: 90%; // Ajusta la altura del botón al 100% de la barra de búsqueda
+      height: 90%;
       object-fit: contain;
 
       .search-bar-button-logo {

@@ -24,6 +24,7 @@ const Searchbar = () => {
   const returnReset = () => {
     navigate("/");
     setQuery("");
+    document.title = "Meli Clone";
   };
 
   return (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "./ProductDetails.scss";
-import CurrencyFormat from "../CurrencyFormat/CurrencyFormat";
+import CurrencyFormat from "../Utilities/CurrencyFormat/CurrencyFormat";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -36,7 +36,6 @@ const ProductDetails = () => {
   if (!product) {
     return <div>Cargando...</div>;
   }
-
 
   return (
     <div className="container-search">
